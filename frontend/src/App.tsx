@@ -1,10 +1,17 @@
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="bg-slate-500 h-screen w-s">
-      
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/'></Route>
+        <Route path='/login'></Route>
+        <Route path='/register'></Route>
+        <Route path='/home'></Route>
+        <Route path='/profile'></Route>
+      </Routes>
+    </Router>
   );
 }
 
