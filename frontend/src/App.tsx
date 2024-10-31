@@ -1,15 +1,18 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/'></Route>
-        <Route path='/login'></Route>
-        <Route path='/register'></Route>
-        <Route path='/home'></Route>
-        <Route path='/profile'></Route>
+        <Route path='/home' element={<Home/>} />
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
+        <Route path='/profile' element={<Profile/>}/>
       </Routes>
     </Router>
   );
