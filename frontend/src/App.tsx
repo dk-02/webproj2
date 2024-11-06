@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import { useState, useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
+import Landing from './pages/Landing';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -35,6 +36,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path='/' element={<Landing/>}/>
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
           <Route path="/home" element={<Home />} />
         </Route>
