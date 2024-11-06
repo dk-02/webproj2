@@ -57,14 +57,13 @@ const Login : React.FC = () => {
                 {error && <p className="text-red-600 mt-5">{error}</p>} 
 
                 <form onSubmit={(e) => handleLogin(e)} className="h-full w-full flex flex-col items-center justify-center">
-                    <input type="text" name="username" value={username} placeholder="Username" onChange={(e) => handleChange("username", e)} className="w-3/5 p-2 rounded-sm bg-slate-100 border-indigo-900 border-2"/>
-                    <input type="password" name="password" value={password} placeholder="Password" onChange={(e) => handleChange("password", e)} className="w-3/5 p-2 mt-3 rounded-sm bg-slate-100 border-indigo-900 border-2"/>
+                    <input type="text" name="username" value={username} placeholder="Username" onChange={(e) => handleChange("username", e)} className="w-3/5 p-2 rounded-sm bg-indigo-100 border-indigo-900 border-2"/>
+                    <input type="password" name="password" value={password} placeholder="Password" onChange={(e) => handleChange("password", e)} className="w-3/5 p-2 mt-3 rounded-sm bg-indigo-100 border-indigo-900 border-2"/>
 
                     <button type="submit" className="bg-indigo-700 px-5 py-2 text-white font-semibold rounded mt-10">Log In</button>
                 </form>
             </div>
         </div>
-        
     );
 
 }
