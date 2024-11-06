@@ -24,14 +24,14 @@ export const login = async (req : Request, res : Response) => {
 
         const user = result.rows[0];
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await bcrypt.compare(password, user.password) || password === user.password;
         if(!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
         const tkn = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
 
-        return res.status(200).json({ message: 'Login successful', tkn });
+        return res.status(200).json({ message: 'Login successful', token: tkn });
 
     } catch (error) {
         console.error('Database error', error);
@@ -74,4 +74,8 @@ export const register = async (req: Request, res: Response) => {
         console.error('Database error', err);
         return res.status(500).json({ message: 'Internal server error.' });
     }
+}
+
+export const checkAuth = (req: Request, res: Response) => {
+    res.status(200).json({ message: "User is authenticated.", status: true });
 }

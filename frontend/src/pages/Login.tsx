@@ -1,38 +1,28 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const Login : React.FC = () => {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const handleChange = (src : "username" | "password", e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
+        src === "username" ? setUsername(value) : src === "password" ? setPassword(value) : console.error("An error occured.");
 
-        switch(src) {
-            case "username":
-                setUsername(value);
-                break;
-            case "password":
-                setPassword(value);
-                break;
-            default:
-                console.error("An error occured.");
-                break;
-        }
     }
 
 
     const handleLogin = async (e : React.FormEvent) => {
         e.preventDefault();
-
         setError(null);
 
         if(!username || !password) {
             setError("Please enter both username and password.");
             return;
         }
-
 
         try {
             const response = await fetch("http://localhost:5000/auth/login", {
@@ -48,14 +38,16 @@ const Login : React.FC = () => {
             }
 
             const data = await response.json();
-            console.log("Login successful:", data);
-            // Ovdje možete dalje upravljati uspješnom prijavom, npr. preusmjeriti korisnika ili postaviti token
+            localStorage.setItem("accessToken", data.token);
+
+            navigate("/home");
 
         } catch (error: any) {
             setError(error.message || "An error occurred during login.");
         }
         
     }
+    
 
     return(
         <div className="h-screen w-screen flex flex-col items-center justify-center bg-slate-300">
