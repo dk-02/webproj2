@@ -7,11 +7,12 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Zamijenite s točnom domenom frontend aplikacije
-    methods: 'GET,POST', // Dozvolite samo potrebne metode
-    allowedHeaders: 'Content-Type,Authorization', // Dozvolite potrebne zaglavlje
+    origin: FRONTEND_URL, 
+    methods: 'GET,POST',
+    allowedHeaders: 'Content-Type,Authorization',
     credentials: true
 }));
 
