@@ -8,7 +8,7 @@ const Header : React.FC = () => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await fetch("http://localhost:5000/auth/check", {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/check`, {
                     method: "GET",
                     headers: {
                         "Authorization" : `Bearer ` + localStorage.getItem("accessToken")

@@ -9,6 +9,7 @@ const Register : React.FC = () => {
     const [email, setEmail] = useState<string>("");
     const [secure, setSecure] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (src : "username" | "password" | "email", e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +19,7 @@ const Register : React.FC = () => {
 
     const handleRegister = async (e : React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         setError(null);
 
         if(!username || !password || !email) {
@@ -26,7 +28,7 @@ const Register : React.FC = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/auth/register", {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -41,9 +43,11 @@ const Register : React.FC = () => {
                 return;
             }
 
+            setLoading(false);
             navigate("/login");
 
         } catch (error: any) {
+            setLoading(false);
             setError(error.message || "An error occurred during registration.");
         }
     }
@@ -70,6 +74,12 @@ const Register : React.FC = () => {
                         <input type="checkbox" name="secure" checked={!secure} onChange={handleCheck} className="h-5 w-5 accent-indigo-600"/>
                         <label>Sensitive data exposure vulnerability {secure ? "disabled" : "enabled"}</label>
                     </div>
+
+                    {loading && (
+                        <div className="flex justify-center mt-4">
+                            <div className="w-8 h-8 border-4 border-t-4 border-gray-200 border-t-indigo-500 rounded-full animate-spin"></div>
+                        </div>
+                    )}
 
                     <button type="submit" className="bg-indigo-700 px-5 py-2 text-white font-semibold rounded mt-10">Register</button>
                 </form>
