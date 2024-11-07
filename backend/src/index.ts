@@ -11,9 +11,16 @@ const FRONTEND_URL = process.env.FRONTEND_URL;
 
 app.use(cors({
     origin: FRONTEND_URL, 
-    methods: 'GET,POST',
-    allowedHeaders: 'Content-Type,Authorization'
+    methods: ['GET','POST'],
+    allowedHeaders: ['Content-Type','Authorization']
 }));
+
+app.options('*', (_req, res) => {
+    res.header("Access-Control-Allow-Origin", FRONTEND_URL);
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.sendStatus(204);
+});
 
 
 app.use(express.json());
