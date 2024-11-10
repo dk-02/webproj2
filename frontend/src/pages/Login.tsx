@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 const Login : React.FC = () => {
@@ -22,28 +23,20 @@ const Login : React.FC = () => {
         if(!username || !password) {
             setError("Please enter both username and password.");
             return;
-        }
-
+        }      
+          
         try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ username, password }),
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, {
+                username,
+                password
             });
 
-            if (!response.ok) {
-                throw new Error("Login failed. Please check your credentials.");
-            }
-
-            const data = await response.json();
-            localStorage.setItem("accessToken", data.token);
+            localStorage.setItem("accessToken", response.data.token);
 
             navigate("/home");
 
         } catch (error: any) {
-            setError(error.message || "An error occurred during login.");
+            setError(error.response?.data?.message || "An error occurred during login.");
         }
         
     }
