@@ -30,11 +30,6 @@ const Login : React.FC = () => {
                 password
             });
 
-            if (!response.ok) {
-                setError("Login failed. Please check your credentials.");
-                return;
-            }
-
             localStorage.setItem("accessToken", response.data.token);
 
             navigate("/home");
