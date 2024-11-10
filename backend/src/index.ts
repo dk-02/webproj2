@@ -7,10 +7,9 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const FRONTEND_URL = process.env.FRONTEND_URL;
 
 app.use(cors({
-    origin: FRONTEND_URL, 
+    origin: '*', 
     methods: 'GET,POST,DELETE',
     allowedHeaders: 'Content-Type,Authorization'
 }));
