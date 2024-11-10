@@ -11,7 +11,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL;
 
 app.use(cors({
     origin: FRONTEND_URL, 
-    methods: 'GET,POST',
+    methods: 'GET,POST,DELETE',
     allowedHeaders: 'Content-Type,Authorization'
 }));
 
