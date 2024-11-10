@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import axios from "axios";
 
 
 const Login : React.FC = () => {
@@ -27,12 +26,6 @@ const Login : React.FC = () => {
         }      
           
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, {
-                username,
-                password
-            });
-
-            localStorage.setItem("accessToken", response.data.token);
             const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, {
                 username,
                 password
