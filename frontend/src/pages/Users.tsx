@@ -18,7 +18,7 @@ const Users : React.FC = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/users/getAll`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/users/getAll`);
             return response.data;
         } catch (error: any) {
             toast.error('Error fetching user:', error);
