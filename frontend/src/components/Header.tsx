@@ -39,7 +39,7 @@ const Header : React.FC = () => {
                 <h2 className="font-bold text-2xl">Fake forum</h2>
             </div>
             <div>
-                {isAuthenticated && <button onClick={handleLogout}>Log out</button>}                
+                {isAuthenticated && <button onClick={handleLogout} className="font-bold text-2xl">Log out</button>}                
             </div>
         </header>
     )

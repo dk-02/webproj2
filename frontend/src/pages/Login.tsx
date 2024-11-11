@@ -12,9 +12,7 @@ const Login : React.FC = () => {
     const handleChange = (src : "username" | "password", e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         src === "username" ? setUsername(value) : src === "password" ? setPassword(value) : console.error("An error occured.");
-
     }
-
 
     const handleLogin = async (e : React.FormEvent) => {
         e.preventDefault();
@@ -37,7 +35,6 @@ const Login : React.FC = () => {
 
         } catch (error: any) {
             setError(error.response?.data?.message || "An error occurred during login.");
-            setError(error.response?.data?.message || "An error occurred during login.");
         }
         
     }
@@ -45,10 +42,13 @@ const Login : React.FC = () => {
 
     return(
         <div className="h-screen w-screen flex flex-col items-center justify-center bg-slate-100">
+            <div className="absolute top-8 left-10">
+                <button onClick={() => navigate('/')} className="hover:border-b-2 hover:border-b-indigo-400 transition-all duration-100 ease-in font-medium text-indigo-950">Go back</button>
+            </div>
             <div className="h-1/2 w-2/3 sm:w-3/5 md:w-2/5 lg:w-1/3 xl:w-1/4 flex flex-col items-center py-10 bg-white shadow-lg">
-                <h1 className="font-bold text-4xl text-indigo-900">Login</h1>
+                <h1 className="font-bold text-4xl text-indigo-900 mb-5">Login</h1>
 
-                {error && <p className="text-red-600 mt-5">{error}</p>} 
+                {error && <p className="text-red-600">{error}</p>} 
 
                 <form onSubmit={(e) => handleLogin(e)} className="h-full w-full flex flex-col items-center justify-center">
                     <input type="text" name="username" value={username} placeholder="Username" onChange={(e) => handleChange("username", e)} className="w-3/5 p-2 rounded-sm bg-indigo-100 border-indigo-900 border-2"/>

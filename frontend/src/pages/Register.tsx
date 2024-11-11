@@ -24,6 +24,7 @@ const Register : React.FC = () => {
 
         if(!username || !password || !email) {
             setError("Please fill all the fields.");
+            setLoading(false);
             return;
         }
 
@@ -58,10 +59,13 @@ const Register : React.FC = () => {
 
     return(
         <div className="h-screen w-screen flex flex-col items-center justify-center bg-slate-100">
-            <div className="h-1/2 w-2/3 sm:w-3/5 md:w-2/5 lg:w-1/3 xl:w-1/4 flex flex-col items-center py-10 bg-white shadow-lg">
-                <h1 className="font-bold text-4xl text-indigo-900">Register</h1>
+            <div className="absolute top-8 left-10">
+                <button onClick={() => navigate('/')} className="hover:border-b-2 hover:border-b-indigo-400 transition-all duration-100 ease-in font-medium text-indigo-950">Go back</button>
+            </div>
+            <div className="min-h-1/2 w-2/3 sm:w-3/5 md:w-2/5 lg:w-1/3 xl:w-1/4 flex flex-col items-center py-10 bg-white shadow-lg">
+                <h1 className="font-bold text-4xl text-indigo-900 mb-5">Register</h1>
 
-                {error && <p className="text-red-600 mt-5">{error}</p>} 
+                {error && <p className="text-red-600 mb-3">{error}</p>} 
 
                 <form onSubmit={(e) => handleRegister(e)} className="h-full w-full flex flex-col items-center justify-center">
                     <input type="text" name="email" value={email} placeholder="Email" onChange={(e) => handleChange("email", e)} className="w-3/5 p-2 rounded-sm bg-indigo-100 border-indigo-900 border-2"/>
@@ -70,7 +74,7 @@ const Register : React.FC = () => {
                     
                     <input type="password" name="password" value={password} placeholder="Password" onChange={(e) => handleChange("password", e)} className="w-3/5 p-2 mt-3 rounded-sm bg-indigo-100 border-indigo-900 border-2"/>
 
-                    <div className="flex gap-2 justify-center items-center mt-3">
+                    <div className="flex gap-2 justify-center items-center mt-5">
                         <input type="checkbox" name="secure" checked={!secure} onChange={handleCheck} className="h-5 w-5 accent-indigo-600"/>
                         <label>Sensitive data exposure vulnerability {secure ? "disabled" : "enabled"}</label>
                     </div>
@@ -81,7 +85,7 @@ const Register : React.FC = () => {
                         </div>
                     )}
 
-                    <button type="submit" className="bg-indigo-700 px-5 py-2 text-white font-semibold rounded mt-10">Register</button>
+                    <button type="submit" className="bg-indigo-700 px-5 py-2 text-white font-semibold rounded mt-5">Register</button>
                 </form>
             </div>
 
